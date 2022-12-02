@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Chocolate {
+public class Chocolate implements Comparable<Chocolate>{
 
     private String name;
     private double price;
@@ -49,7 +49,18 @@ public class Chocolate {
         this.calories = calories;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Chocolate)) return false;
+        Chocolate chocolate = (Chocolate) o;
+        return getCalories() == chocolate.getCalories() && Objects.equals(getName(), chocolate.getName()) && Objects.equals(getColour(), chocolate.getColour());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getColour(), getCalories());
+    }
 
     @Override
     public String toString() {
@@ -60,4 +71,16 @@ public class Chocolate {
                 ", calories=" + calories +
                 '}';
     }
+
+    @Override
+    public int compareTo(Chocolate o) {
+        return this.colour.compareTo(o.colour);
+    }
+
+//    @Override
+//    public int compareTo(Chocolate o) {
+//        return this.calories - o.calories;
+//    }
+
+
 }
